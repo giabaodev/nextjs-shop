@@ -3,6 +3,8 @@ import { Inter } from 'next/font/google';
 import '../../styles/globals.css';
 import { type Locale, i18n } from '@/configs/i18n-config';
 import { ThemeProvider } from '@/components/theme-provider';
+import Header from '@/components/shared/Header';
+import { getDictionary } from '@/configs/get-dictionary';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -16,17 +18,19 @@ export async function generateStaticParams() {
   return i18n.locales.map((locale) => ({ lang: locale }));
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
   params: { lng },
 }: Readonly<{
   children: React.ReactNode;
   params: { lng: Locale };
 }>) {
+  const dictionary = await getDictionary(lng);
   return (
     <html lang={lng}>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <Header dictionary={dictionary} />
           {children}
         </ThemeProvider>
       </body>

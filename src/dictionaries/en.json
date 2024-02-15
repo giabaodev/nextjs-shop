@@ -1,0 +1,10 @@
+{
+    "auth": {
+        "lg": "Login",
+        "lo": "Logout"
+    },
+    "lang": {
+        "en": "English",
+        "vi": "Vietnamese"
+    }
+}
