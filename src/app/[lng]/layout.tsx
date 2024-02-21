@@ -1,10 +1,10 @@
+import Navbar from '@/components/shared/Navbar';
+import { ThemeProvider } from '@/components/theme-provider';
+import { getDictionary } from '@/configs/get-dictionary';
+import { i18n, type Locale } from '@/configs/i18n-config';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import '../../styles/globals.css';
-import { type Locale, i18n } from '@/configs/i18n-config';
-import { ThemeProvider } from '@/components/theme-provider';
-import Header from '@/components/shared/Header';
-import { getDictionary } from '@/configs/get-dictionary';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -27,10 +27,10 @@ export default async function RootLayout({
 }>) {
   const dictionary = await getDictionary(lng);
   return (
-    <html lang={lng}>
+    <html lang={lng} suppressHydrationWarning>
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <Header dictionary={dictionary} />
+          <Navbar />
           {children}
         </ThemeProvider>
       </body>
